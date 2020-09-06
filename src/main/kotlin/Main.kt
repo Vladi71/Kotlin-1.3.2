@@ -1,19 +1,22 @@
 package ru.netology
 
 
-const val amount = 80_000_00
+
 
 fun main() {
-    val transferMethod = "mastercard and Maestro"
+    transfer(0,120000)
+
+}
+fun transfer(total: Int, amount: Int){
+    val transferMethod = "vkPay"
     when (transferMethod) {
-        "mastercard and Maestro" -> mastercardAndMaestro()
-        "visa and Mir" -> visaAndMir()
-        "vkPay" -> vkPay()
+        "mastercard and Maestro" -> mastercardAndMaestro(total, amount)
+        "visa and Mir" -> visaAndMir(total, amount)
+        "vkPay" -> vkPay(total, amount)
     }
 }
 
-fun mastercardAndMaestro() {
-    val total = 20_000_00
+fun mastercardAndMaestro(total: Int, amount: Int) {
     val totalDay = 0
     val masterCommission = 0.0060
     val commission: Int = (amount * masterCommission + 2000).toInt()
@@ -25,8 +28,7 @@ fun mastercardAndMaestro() {
     }
 }
 
-fun visaAndMir() {
-    val total = 15_000_00
+fun visaAndMir(total: Int, amount: Int) {
     val totalDay = 0
     val minCommission = 3500
     val percentCommission = 0.0075
@@ -40,8 +42,7 @@ fun visaAndMir() {
     println("Перевод выполнен! Комиссия составила $result коп.")
 }
 
-fun vkPay() {
-    val total = 0
+fun vkPay(total: Int, amount: Int) {
     when {
         total > 40_000_00 -> println("Превышен лимит переводов в месяц!")
         amount > 15_000_00 -> println("Превышена максимальная сумма перевода!")
