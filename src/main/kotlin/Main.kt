@@ -1,52 +1,44 @@
 package ru.netology
 
 
-
-
 fun main() {
-    transfer(0,120000)
+    println(transfer(0, 3000, "visa and Mir"))
 
 }
-fun transfer(total: Int, amount: Int){
-    val transferMethod = "vkPay"
-    when (transferMethod) {
+
+fun transfer(total: Int, amount: Int, transferMethod: String): String {
+
+    return when (transferMethod) {
         "mastercard and Maestro" -> mastercardAndMaestro(total, amount)
         "visa and Mir" -> visaAndMir(total, amount)
         "vkPay" -> vkPay(total, amount)
+        else -> "Данный счет не существует!"
     }
 }
 
-fun mastercardAndMaestro(total: Int, amount: Int) {
-    val totalDay = 0
+fun mastercardAndMaestro(total: Int, amount: Int): String {
     val masterCommission = 0.0060
     val commission: Int = (amount * masterCommission + 2000).toInt()
-    when {
-        totalDay + amount > 150_000_00 -> println("Превышен лимит перевода в сутки!")
-        total + amount > 600_000_00 -> println("Превышен лимит перевода в текущем месяце!")
-        total + amount <= 7_500_000 -> println("Перевод выполнен! Комиссия составила 0 коп.")
-        else -> println("Перевод выполнен! Комиссия составила $commission коп.")
+    return when {
+        total + amount <= 7_500_000 || total + amount >= 300_00 -> "Перевод выполнен! Комиссия составила 0 коп."
+        else -> "Перевод выполнен! Комиссия составила $commission коп."
     }
 }
 
-fun visaAndMir(total: Int, amount: Int) {
-    val totalDay = 0
+fun visaAndMir(total: Int, amount: Int): String {
     val minCommission = 3500
     val percentCommission = 0.0075
     val commission: Int = (amount * percentCommission).toInt()
-    val result = when {
-        total + amount > 600_000_00 -> println("Превышен лимит перевода в текущем месяце!")
-        totalDay + amount > 150_000_00 -> println("Превышен лимит перевода в сутки!")
-        commission < minCommission -> minCommission
-        else -> commission
+    return when {
+        commission < 3500 -> "Перевод выполнен! Комиссия составила $minCommission коп."
+        else -> "Перевод выполнен! Комиссия составила $commission коп."
     }
-    println("Перевод выполнен! Комиссия составила $result коп.")
 }
 
-fun vkPay(total: Int, amount: Int) {
-    when {
-        total > 40_000_00 -> println("Превышен лимит переводов в месяц!")
-        amount > 15_000_00 -> println("Превышена максимальная сумма перевода!")
-        else -> println("Перевод выполнен! Комиссия составила 0 коп.")
+fun vkPay(total: Int, amount: Int): String {
+    return when {
+        total > 40_000_00 -> "Превышен лимит переводов в месяц!"
+        amount > 15_000_00 -> "Превышена максимальная сумма перевода!"
+        else -> "Перевод выполнен! Комиссия составила 0 коп."
     }
-
 }
