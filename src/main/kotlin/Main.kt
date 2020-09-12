@@ -6,13 +6,12 @@ fun main() {
 
 }
 
-fun transfer(total: Int, amount: Int, transferMethod: String): String {
+fun transfer(total: Int, amount: Int, transferMethod: String): Int {
 
     return when (transferMethod) {
-        "mastercard and Maestro" -> mastercardAndMaestro(total, amount).toString()
-        "visa and Mir" -> visaAndMir(total, amount).toString()
-        "vkPay" -> vkPay(total, amount).toString()
-        else -> "Данный счет не существует!"
+        "mastercard and Maestro" -> mastercardAndMaestro(total, amount)
+        "visa and Mir" -> visaAndMir(total, amount)
+        else -> vkPay(total, amount)
     }
 }
 
