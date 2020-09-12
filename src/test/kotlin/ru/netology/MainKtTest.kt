@@ -17,7 +17,7 @@ class MainKtTest {
             total = total, amount = amount
         )
         //assert
-        assertEquals(0, result)
+        assertEquals(50, result)
     }
 
     @Test
